@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Carl Jade Bais - Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f0f0f;
+  color: #fff;
+}
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15,15,15,0.9);
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 30px;
+}
+nav ul { list-style: none; display: flex; gap: 20px; }
+nav li {
+  cursor: pointer;
+  padding: 8px 12px;
+}
+nav li.active, nav li:hover {
+  background: #f08080;
+  border-radius: 6px;
+}
+
+section {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: 0.5s;
+}
+section.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+#hero img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid #f08080;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+h1 { font-size: 3rem; }
+h2 { color: #f08080; margin: 10px 0; }
+
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #f08080;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.project img {
+  max-width: 90%;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<ul>
+<li data-section="hero" class="active">Home</li>
+<li data-section="about">About</li>
+<li data-section="skills">Why Me</li>
+<li data-section="projects">Properties</li>
+<li data-section="contact">Contact</li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="active">
+<img src="profile.jpg">
+
+<h1>Carl Jade Bais</h1>
+<h2>Real Estate Property Specialist</h2>
+
+<p>
+I help first-time buyers and investors secure high-potential properties before prices rise.
+</p>
+
+<p style="color:#f08080;">
+"While you were waiting… others were already buying."
+</p>
+
+<button onclick="showSection('projects')">View Properties</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About Me</h2>
+<p>I help clients find the right property at the right time.</p>
+</section>
+
+<!-- WHY ME -->
+<section id="skills">
+<h2>Why Work With Me</h2>
+<p>Property Matching • Financing Help • Negotiation • Full Assistance</p>
+</section>
+
+<!-- PROPERTIES -->
+<section id="projects">
+<h2>Select Property</h2>
+
+<div style="display:flex; gap:10px; margin-bottom:20px;">
+<button onclick="showProperty('wellford')">Wellford</button>
+<button onclick="showProperty('casamira')">Casa Mira</button>
+<button onclick="showProperty('wvtowers')">WV Towers</button>
+</div>
+
+<div>
+<img id="property-img" src="wellford.jpg">
+<h3 id="property-title">Wellford Homes</h3>
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2>Contact Me</h2>
+<input placeholder="Name">
+<input placeholder="Email">
+<textarea placeholder="Message"></textarea>
+<button>Send</button>
+</section>
+
+<script>
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('nav li');
+
+function showSection(id) {
+  sections.forEach(sec => {
+    sec.classList.toggle('active', sec.id === id);
+  });
+
+  navItems.forEach(item => {
+    item.classList.toggle('active', item.dataset.section === id);
+  });
+}
+
+navItems.forEach(item => {
+  item.onclick = () => showSection(item.dataset.section);
+});
+
+function showProperty(type) {
+  const img = document.getElementById("property-img");
+  const title = document.getElementById("property-title");
+
+  if(type === "wellford") {
+    img.src = "wellford.jpg";
+    title.innerText = "Wellford Homes";
+  }
+
+  if(type === "casamira") {
+    img.src = "casamira.jpg";
+    title.innerText = "Casa Mira";
+  }
+
+  if(type === "wvtowers") {
+    img.src = "wvtowers.jpg";
+    title.innerText = "WV Towers";
+  }
+}
+</script>
+
+</body>
+</html>
